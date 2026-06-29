@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberShield AI — Cyber Safety Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            cyber: {
+              50: '#ecfeff',
+              100: '#cffafe',
+              200: '#a5f3fc',
+              300: '#67e8f9',
+              400: '#22d3ee',
+              500: '#06b6d4',
+              600: '#0891b2',
+              700: '#0e7490',
+              800: '#155e75',
+              900: '#164e63',
+              950: '#083344',
+            },
+            shield: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+            },
+            danger: {
+              400: '#f87171',
+              500: '#ef4444',
+              600: '#dc2626',
+            },
+            warn: {
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-950 text-gray-100 font-sans antialiased transition-colors duration-300">
+
+  <!-- App Container -->
+  <div id="app">
+    
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+      <div class="nav-glass mx-4 mt-4 rounded-2xl px-6 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyber-400 to-shield-500 flex items-center justify-center">
+            <i data-lucide="shield-check" class="w-5 h-5 text-white"></i>
+          </div>
+          <span class="text-lg font-bold bg-gradient-to-r from-cyber-300 to-shield-400 bg-clip-text text-transparent">CyberShield AI</span>
+        </div>
+        
+        <div class="hidden md:flex items-center gap-1">
+          <button onclick="navigateTo('landing')" class="nav-link active" data-nav="landing">Home</button>
+          <button onclick="navigateTo('dashboard')" class="nav-link" data-nav="dashboard">Dashboard</button>
+          <button onclick="navigateTo('scanners')" class="nav-link" data-nav="scanners">Scanners</button>
+          <button onclick="navigateTo('automation')" class="nav-link" data-nav="automation">Automation</button>
+          <button onclick="navigateTo('privacy')" class="nav-link" data-nav="privacy">Privacy</button>
+          <button onclick="navigateTo('docs')" class="nav-link" data-nav="docs">Docs</button>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button onclick="toggleTheme()" class="p-2 rounded-xl hover:bg-white/10 transition-colors" title="Toggle theme">
+            <i data-lucide="sun" class="w-4 h-4 theme-icon-light hidden"></i>
+            <i data-lucide="moon" class="w-4 h-4 theme-icon-dark"></i>
+          </button>
+          <button onclick="navigateTo('dashboard')" class="hidden md:flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-cyber-500 to-shield-500 text-white text-sm font-semibold hover:opacity-90 transition-opacity">
+            <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+            Dashboard
+          </button>
+          <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl hover:bg-white/10 transition-colors">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobileMenu" class="hidden md:hidden nav-glass mx-4 mt-2 rounded-2xl p-4">
+        <div class="flex flex-col gap-1">
+          <button onclick="navigateTo('landing');toggleMobileMenu()" class="mobile-nav-link"><i data-lucide="home" class="w-4 h-4"></i> Home</button>
+          <button onclick="navigateTo('dashboard');toggleMobileMenu()" class="mobile-nav-link"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</button>
+          <button onclick="navigateTo('scanners');toggleMobileMenu()" class="mobile-nav-link"><i data-lucide="scan" class="w-4 h-4"></i> Scanners</button>
+          <button onclick="navigateTo('automation');toggleMobileMenu()" class="mobile-nav-link"><i data-lucide="bot" class="w-4 h-4"></i> Automation</button>
+          <button onclick="navigateTo('privacy');toggleMobileMenu()" class="mobile-nav-link"><i data-lucide="lock" class="w-4 h-4"></i> Privacy</button>
+          <button onclick="navigateTo('docs');toggleMobileMenu()" class="mobile-nav-link"><i data-lucide="book-open" class="w-4 h-4"></i> Docs</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ============ LANDING PAGE ============ -->
+    <section id="page-landing" class="page-section active">
+      <!-- Hero -->
+      <div class="relative min-h-screen flex items-center overflow-hidden">
+        <div class="hero-grid"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-cyber-950/50 via-gray-950/80 to-gray-950"></div>
+        <div class="absolute top-20 left-1/4 w-96 h-96 bg-cyber-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-20 right-1/4 w-96 h-96 bg-shield-500/10 rounded-full blur-3xl animate-pulse-slow animation-delay-2000"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 text-center">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyber-500/30 bg-cyber-500/10 text-cyber-300 text-sm font-medium mb-8 animate-fade-in">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            AI-Powered Cybersecurity Intelligence
+          </div>
+          
+          <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-tight mb-6 animate-fade-in animation-delay-200">
+            <span class="block text-white">Protect Your</span>
+            <span class="block bg-gradient-to-r from-cyber-300 via-cyber-400 to-shield-400 bg-clip-text text-transparent">Digital World</span>
+          </h1>
+          
+          <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 animate-fade-in animation-delay-400">
+            Multi-LLM cybersecurity analysis that scans emails, URLs, files, messages, and more — delivering human-like threat assessments in real time.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in animation-delay-600">
+            <button onclick="navigateTo('scanners')" class="group px-8 py-4 rounded-2xl bg-gradient-to-r from-cyber-500 to-shield-500 text-white font-bold text-lg hover:opacity-90 transition-all hover:scale-105 flex items-center gap-2">
+              Start Scanning
+              <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+            </button>
+            <button onclick="navigateTo('dashboard')" class="px-8 py-4 rounded-2xl border border-white/20 text-white font-semibold text-lg hover:bg-white/5 transition-all flex items-center gap-2">
+              <i data-lucide="play-circle" class="w-5 h-5"></i>
+              View Dashboard
+            </button>
+          </div>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-20 animate-fade-in animation-delay-800">
+            <div class="glass-card p-5 rounded-2xl">
+              <div class="text-3xl font-black text-cyber-400" id="stat-scans">0</div>
+              <div class="text-sm text-gray-400 mt-1">Scans Performed</div>
+            </div>
+            <div class="glass-card p-5 rounded-2xl">
+              <div class="text-3xl font-black text-shield-400" id="stat-threats">0</div>
+              <div class="text-sm text-gray-400 mt-1">Threats Detected</div>
+            </div>
+            <div class="glass-card p-5 rounded-2xl">
+              <div class="text-3xl font-black text-cyber-300">8</div>
+              <div class="text-sm text-gray-400 mt-1">Scanner Modules</div>
+            </div>
+            <div class="glass-card p-5 rounded-2xl">
+              <div class="text-3xl font-black text-shield-300">3+</div>
+              <div class="text-sm text-gray-400 mt-1">LLM Engines</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="max-w-7xl mx-auto px-6 py-24">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Comprehensive Scanning Suite</h2>
+          <p class="text-gray-400 text-lg max-w-2xl mx-auto">Eight specialized AI modules, each powered by multiple language models for maximum accuracy and explainability.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="scanner-card group cursor-pointer" onclick="openScanner('email')">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center"><i data-lucide="mail" class="w-5 h-5 text-red-400"></i></div>
+              <h3 class="font-bold text-white">Email Scanner</h3>
+            </div>
+            <p class="text-sm text-gray-400">Detect phishing, spoofing, and malicious attachments in emails.</p>
+          </div>
+
+          <div class="scanner-card group cursor-pointer" onclick="openScanner('url')">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center"><i data-lucide="link" class="w-5 h-5 text-blue-400"></i></div>
+              <h3 class="font-bold text-white">URL Scanner</h3>
+            </div>
+            <p class="text-sm text-gray-400">Analyze URLs for malware, credential harvesting, and suspicious redirects.</p>
+          </div>
+
+          <div class="scanner-card group cursor-pointer" onclick="openScanner('file')">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center"><i data-lucide="file-search" class="w-5 h-5 text-amber-400"></i></div>
+              <h3 class="font-bold text-white">File Scanner</h3>
+            </div>
+            <p class="text-sm text-gray-400">Inspect files for embedded malware, scripts, and suspicious patterns.</p>
+          </div>
+
+          <div class="scanner-card group cursor-pointer" onclick="openScanner('message')">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center"><i data-lucide="message-square" class="w-5 h-5 text-green-400"></i></div>
+              <h3 class="font-bold text-white">Message Scanner</h3>
+            </div>
+            <p class="text-sm text-gray-400">Scan SMS, chat messages, and DMs for social engineering attempts.</p>
+          </div>
+
+          <div class="scanner-card group cursor-pointer" onclick="openScanner('prompt')">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center"><i data-lucide="terminal" class="w-5 h-5 text-purple-400"></i></div>
+              <h3 class="font-bold text-white">Prompt Injection</h3>
+            </div>
+            <p class="text-sm text-gray-400">Detect prompt injection and jailbreak attempts in AI interactions.</p>
+          </div>
+
+          <div class="scanner-card group cursor-pointer" onclick="openScanner('social')">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-pink-500/20 flex items-center justify-center"><i data-lucide="users" class="w-5 h-5 text-pink-400"></i></div>
+              <h3 class="font-bold text-white">Social Engineering</h3>
+            </div>
+            <p class="text-sm text-gray-400">Identify manipulation tactics, pretexting, and impersonation attempts.</p>
+          </div>
+
+          <div class="scanner-card group cursor-pointer" onclick="openScanner('qr')">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-cyan-500/20 flex items-center justify-center"><i data-lucide="qr-code" class="w-5 h-5 text-cyan-400"></i></div>
+              <h3 class="font-bold text-white">QR Code Scanner</h3>
+            </div>
+            <p class="text-sm text-gray-400">Decode and analyze QR codes for malicious destinations and threats.</p>
+          </div>
+
+          <div class="scanner-card group cursor-pointer" onclick="openScanner('malware')">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-orange-500/20 flex items-center justify-center"><i data-lucide="bug" class="w-5 h-5 text-orange-400"></i></div>
+              <h3 class="font-bold text-white">Malware Risk</h3>
+            </div>
+            <p class="text-sm text-gray-400">Assess malware risk through behavioral analysis and pattern matching.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Multi-LLM Section -->
+      <div class="max-w-7xl mx-auto px-6 py-24">
+        <div class="glass-card rounded-3xl p-8 md:p-12">
+          <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyber-500/20 text-cyber-300 text-xs font-semibold mb-4">
+                <i data-lucide="cpu" class="w-3 h-3"></i> MULTI-LLM ENGINE
+              </div>
+              <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">One Request, Multiple Minds</h2>
+              <p class="text-gray-400 mb-6">Every scan is analyzed by multiple language models simultaneously. Their outputs are compared, aggregated, and synthesized into one explainable final verdict.</p>
+              <div class="space-y-3">
+                <div class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-cyber-400"></div><span class="text-sm text-gray-300">Cross-model verification for higher accuracy</span></div>
+                <div class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-shield-400"></div><span class="text-sm text-gray-300">Confidence-weighted aggregation</span></div>
+                <div class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-purple-400"></div><span class="text-sm text-gray-300">Explainable consensus-based verdicts</span></div>
+                <div class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-amber-400"></div><span class="text-sm text-gray-300">Fallback resilience if one model fails</span></div>
+              </div>
+            </div>
+            <div class="relative">
+              <div class="glass-card rounded-2xl p-6 space-y-4">
+                <div class="flex items-center gap-3 mb-2">
+                  <div class="w-3 h-3 rounded-full bg-danger-400 animate-pulse"></div>
+                  <span class="text-xs font-mono text-gray-400">Multi-LLM Analysis Pipeline</span>
+                </div>
+                <div class="llm-bar" style="--delay:0;--color:#06b6d4"><span>GPT-4o</span><div class="llm-progress" style="width:92%"></div><span class="text-xs text-cyber-300">92%</span></div>
+                <div class="llm-bar" style="--delay:200;--color:#22c55e"><span>Claude 3.5</span><div class="llm-progress" style="width:88%"></div><span class="text-xs text-shield-300">88%</span></div>
+                <div class="llm-bar" style="--delay:400;--color:#a855f7"><span>Gemini Pro</span><div class="llm-progress" style="width:85%"></div><span class="text-xs text-purple-300">85%</span></div>
+                <div class="h-px bg-white/10 my-3"></div>
+                <div class="flex items-center justify-between">
+                  <span class="text-sm font-semibold text-white">Aggregated Verdict</span>
+                  <span class="px-3 py-1 rounded-full bg-danger-500/20 text-danger-400 text-xs font-bold">HIGH RISK</span>
+                </div>
+                <div class="llm-bar"><span>Confidence</span><div class="llm-progress bg-gradient-to-r from-cyber-500 to-shield-500" style="width:89%"></div><span class="text-xs text-white font-bold">89%</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="max-w-7xl mx-auto px-6 py-24 text-center">
+        <div class="glass-card rounded-3xl p-12 md:p-20 relative overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-br from-cyber-500/10 to-shield-500/10"></div>
+          <div class="relative z-10">
+            <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Ready to Stay Safe?</h2>
+            <p class="text-gray-400 text-lg mb-8 max-w-xl mx-auto">Start scanning with AI-powered cybersecurity intelligence. No sign-up required for basic scans.</p>
+            <button onclick="navigateTo('scanners')" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-cyber-500 to-shield-500 text-white font-bold text-lg hover:opacity-90 transition-all hover:scale-105">
+              Launch Scanner
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="border-t border-white/10 py-8">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 rounded-lg bg-gradient-to-br from-cyber-400 to-shield-500 flex items-center justify-center"><i data-lucide="shield-check" class="w-3 h-3 text-white"></i></div>
+            <span class="text-sm font-semibold text-gray-400">CyberShield AI</span>
+          </div>
+          <div class="flex items-center gap-6 text-sm text-gray-500">
+            <button onclick="navigateTo('privacy')" class="hover:text-gray-300 transition-colors">Privacy</button>
+            <button onclick="navigateTo('docs')" class="hover:text-gray-300 transition-colors">Documentation</button>
+            <span>© 2025 CyberShield AI</span>
+          </div>
+        </div>
+      </footer>
+    </section>
+
+    <!-- ============ DASHBOARD ============ -->
+    <section id="page-dashboard" class="page-section">
+      <div class="max-w-7xl mx-auto px-6 pt-28 pb-12">
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+          <div>
+            <h1 class="text-3xl font-bold text-white">Security Dashboard</h1>
+            <p class="text-gray-400 mt-1">Real-time threat overview and scan analytics</p>
+          </div>
+          <button onclick="navigateTo('scanners')" class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyber-500 to-shield-500 text-white font-semibold hover:opacity-90 transition">
+            <i data-lucide="scan" class="w-4 h-4"></i> New Scan
+          </button>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div class="glass-card rounded-2xl p-5">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl bg-cyber-500/20 flex items-center justify-center"><i data-lucide="scan" class="w-5 h-5 text-cyber-400"></i></div>
+              <span class="text-xs text-shield-400 font-semibold">+12%</span>
+            </div>
+            <div class="text-2xl font-bold text-white">1,284</div>
+            <div class="text-sm text-gray-400">Total Scans</div>
+          </div>
+          <div class="glass-card rounded-2xl p-5">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl bg-danger-500/20 flex items-center justify-center"><i data-lucide="alert-triangle" class="w-5 h-5 text-danger-400"></i></div>
+              <span class="text-xs text-danger-400 font-semibold">+5%</span>
+            </div>
+            <div class="text-2xl font-bold text-white">47</div>
+            <div class="text-sm text-gray-400">Threats Found</div>
+          </div>
+          <div class="glass-card rounded-2xl p-5">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl bg-shield-500/20 flex items-center justify-center"><i data-lucide="shield-check" class="w-5 h-5 text-shield-400"></i></div>
+              <span class="text-xs text-shield-400 font-semibold">96.3%</span>
+            </div>
+            <div class="text-2xl font-bold text-white">Safe Rate</div>
+            <div class="text-sm text-gray-400">Items Clean</div>
+          </div>
+          <div class="glass-card rounded-2xl p-5">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center"><i data-lucide="cpu" class="w-5 h-5 text-purple-400"></i></div>
+              <span class="text-xs text-purple-400 font-semibold">3 Active</span>
+            </div>
+            <div class="text-2xl font-bold text-white">3</div>
+            <div class="text-sm text-gray-400">LLM Engines</div>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="grid lg:grid-cols-3 gap-4 mb-8">
+          <div class="lg:col-span-2 glass-card rounded-2xl p-6">
+            <h3 class="font-semibold text-white mb-4">Scan Activity (Last 7 Days)</h3>
+            <div class="h-64"><canvas id="chartActivity"></canvas></div>
+          </div>
+          <div class="glass-card rounded-2xl p-6">
+            <h3 class="font-semibold text-white mb-4">Threat Categories</h3>
+            <div class="h-64"><canvas id="chartThreats"></canvas></div>
+          </div>
+        </div>
+
+        <!-- Recent Scans & Tips -->
+        <div class="grid lg:grid-cols-3 gap-4">
+          <div class="lg:col-span-2 glass-card rounded-2xl p-6">
+            <h3 class="font-semibold text-white mb-4">Recent Scans</h3>
+            <div class="space-y-3" id="recentScansList">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+          <div class="glass-card rounded-2xl p-6">
+            <h3 class="font-semibold text-white mb-4">Security Tips</h3>
+            <div class="space-y-3" id="securityTips">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SCANNERS ============ -->
+    <section id="page-scanners" class="page-section">
+      <div class="max-w-7xl mx-auto px-6 pt-28 pb-12">
+        <div class="mb-8">
+          <h1 class="text-3xl font-bold text-white">Scanner Modules</h1>
+          <p class="text-gray-400 mt-1">Choose a scanner or start a quick scan below</p>
+        </div>
+
+        <!-- Scanner Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8" id="scannerGrid">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Scan Interface -->
+        <div id="scanInterface" class="hidden">
+          <!-- Context Box -->
+          <div class="glass-card rounded-2xl p-6 mb-4">
+            <div class="flex items-center gap-2 mb-3">
+              <i data-lucide="message-circle" class="w-5 h-5 text-cyber-400"></i>
+              <h3 class="font-semibold text-white">Context Box</h3>
+              <span class="text-xs text-gray-500 ml-2">Help our AI analyze this item better</span>
+            </div>
+            <p class="text-sm text-gray-400 mb-3">Tell us anything that may help analyze this item. For example: Where did you receive it? Was it expected? Who sent it? Any additional context?</p>
+            <textarea id="contextInput" rows="3" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm text-gray-200 placeholder-gray-500 focus:border-cyber-500 focus:outline-none focus:ring-1 focus:ring-cyber-500/50 resize-none transition" placeholder="e.g., Received this email claiming to be from my bank. I didn't request any password reset..."></textarea>
+          </div>
+
+          <!-- Input Area -->
+          <div class="glass-card rounded-2xl p-6 mb-4">
+            <div class="flex items-center gap-2 mb-4">
+              <div id="scanIcon" class="w-8 h-8 rounded-lg bg-cyber-500/20 flex items-center justify-center"><i data-lucide="scan" class="w-4 h-4 text-cyber-400"></i></div>
+              <h3 class="font-semibold text-white" id="scanTitle">Scanner</h3>
+            </div>
+            <div id="scanInputArea">
+              <!-- Dynamic input based on scanner type -->
+            </div>
+            <button onclick="runScan()" id="scanBtn" class="mt-4 w-full py-3 rounded-xl bg-gradient-to-r from-cyber-500 to-shield-500 text-white font-bold hover:opacity-90 transition flex items-center justify-center gap-2">
+              <i data-lucide="zap" class="w-4 h-4"></i>
+              <span>Analyze with Multi-LLM</span>
+            </button>
+          </div>
+
+          <!-- Progress -->
+          <div id="scanProgress" class="hidden glass-card rounded-2xl p-6 mb-4">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-2 h-2 rounded-full bg-cyber-400 animate-pulse"></div>
+              <span class="font-semibold text-white text-sm">Analyzing...</span>
+            </div>
+            <div class="space-y-3">
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 rounded-full border-2 border-cyber-400 border-t-transparent animate-spin" id="llm1spinner"></div>
+                <span class="text-sm text-gray-300">GPT-4o analyzing...</span>
+                <span class="text-xs text-cyber-400 ml-auto" id="llm1status">Processing</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 rounded-full border-2 border-shield-400 border-t-transparent animate-spin" id="llm2spinner"></div>
+                <span class="text-sm text-gray-300">Claude 3.5 analyzing...</span>
+                <span class="text-xs text-shield-400 ml-auto" id="llm2status">Processing</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 rounded-full border-2 border-purple-400 border-t-transparent animate-spin" id="llm3spinner"></div>
+                <span class="text-sm text-gray-300">Gemini Pro analyzing...</span>
+                <span class="text-xs text-purple-400 ml-auto" id="llm3status">Processing</span>
+              </div>
+              <div class="mt-4 h-2 bg-white/5 rounded-full overflow-hidden">
+                <div id="progressBar" class="h-full bg-gradient-to-r from-cyber-500 to-shield-500 rounded-full transition-all duration-500" style="width:0%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results -->
+          <div id="scanResults" class="hidden space-y-4">
+            <!-- LLM Individual Results -->
+            <div class="glass-card rounded-2xl p-6">
+              <h3 class="font-semibold text-white mb-4 flex items-center gap-2"><i data-lucide="cpu" class="w-5 h-5 text-purple-400"></i> Individual LLM Analysis</h3>
+              <div class="grid md:grid-cols-3 gap-4" id="llmResultsGrid">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <!-- Aggregated Verdict -->
+            <div class="glass-card rounded-2xl p-6" id="verdictCard">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-semibold text-white flex items-center gap-2"><i data-lucide="shield-check" class="w-5 h-5 text-cyber-400"></i> Aggregated Verdict</h3>
+                <div id="verdictBadge" class="px-4 py-1.5 rounded-full text-sm font-bold"></div>
+              </div>
+              <div id="verdictContent" class="space-y-4">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <!-- Confidence Score -->
+            <div class="glass-card rounded-2xl p-6">
+              <h3 class="font-semibold text-white mb-4 flex items-center gap-2"><i data-lucide="gauge" class="w-5 h-5 text-shield-400"></i> Confidence Score</h3>
+              <div class="flex items-center gap-6">
+                <div class="relative w-32 h-32">
+                  <svg viewBox="0 0 36 36" class="w-32 h-32 transform -rotate-90">
+                    <circle cx="18" cy="18" r="15.9" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"></circle>
+                    <circle id="confCircle" cx="18" cy="18" r="15.9" fill="none" stroke-width="2" stroke-dasharray="0, 100" stroke-linecap="round" class="transition-all duration-1000"></circle>
+                  </svg>
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <span id="confValue" class="text-2xl font-black text-white">0%</span>
+                  </div>
+                </div>
+                <div class="flex-1 space-y-2" id="confBreakdown">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- AI Opinion -->
+            <div class="glass-card rounded-2xl p-6">
+              <div class="flex items-center gap-2 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyber-500 to-shield-500 flex items-center justify-center"><i data-lucide="bot" class="w-4 h-4 text-white"></i></div>
+                <h3 class="font-semibold text-white">AI Security Advisor Opinion</h3>
+              </div>
+              <div id="aiOpinion" class="prose prose-invert max-w-none text-gray-300 text-sm leading-relaxed">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ AUTOMATION ============ -->
+    <section id="page-automation" class="page-section">
+      <div class="max-w-7xl mx-auto px-6 pt-28 pb-12">
+        <div class="mb-8">
+          <h1 class="text-3xl font-bold text-white">Automation Hub</h1>
+          <p class="text-gray-400 mt-1">n8n workflow integrations for automated cybersecurity response</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          <div class="glass-card rounded-2xl p-6 hover:border-cyber-500/50 transition-colors">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center"><i data-lucide="mail-warning" class="w-5 h-5 text-red-400"></i></div>
+              <div>
+                <h3 class="font-semibold text-white">Email Alerts</h3>
+                <span class="text-xs text-gray-500">n8n Workflow</span>
+              </div>
+              <div class="ml-auto px-2 py-1 rounded-lg bg-shield-500/20 text-shield-400 text-xs font-semibold">Active</div>
+            </div>
+            <p class="text-sm text-gray-400 mb-4">Automatically send email alerts when high-risk threats are detected during scans.</p>
+            <div class="flex items-center gap-2 text-xs text-gray-500"><i data-lucide="git-branch" class="w-3 h-3"></i> Trigger: High Risk Verdict → Action: Email Notification</div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6 hover:border-cyber-500/50 transition-colors">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center"><i data-lucide="ticket" class="w-5 h-5 text-blue-400"></i></div>
+              <div>
+                <h3 class="font-semibold text-white">Incident Creation</h3>
+                <span class="text-xs text-gray-500">n8n Workflow</span>
+              </div>
+              <div class="ml-auto px-2 py-1 rounded-lg bg-shield-500/20 text-shield-400 text-xs font-semibold">Active</div>
+            </div>
+            <p class="text-sm text-gray-400 mb-4">Create security incidents in your ticketing system for every critical threat found.</p>
+            <div class="flex items-center gap-2 text-xs text-gray-500"><i data-lucide="git-branch" class="w-3 h-3"></i> Trigger: Critical Risk → Action: Create Incident</div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6 hover:border-cyber-500/50 transition-colors">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center"><i data-lucide="bell" class="w-5 h-5 text-purple-400"></i></div>
+              <div>
+                <h3 class="font-semibold text-white">Slack Notifications</h3>
+                <span class="text-xs text-gray-500">n8n Workflow</span>
+              </div>
+              <div class="ml-auto px-2 py-1 rounded-lg bg-amber-500/20 text-amber-400 text-xs font-semibold">Draft</div>
+            </div>
+            <p class="text-sm text-gray-400 mb-4">Post real-time threat notifications to your team's Slack channel for immediate awareness.</p>
+            <div class="flex items-center gap-2 text-xs text-gray-500"><i data-lucide="git-branch" class="w-3 h-3"></i> Trigger: Any Threat → Action: Slack Message</div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6 hover:border-cyber-500/50 transition-colors">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center"><i data-lucide="database" class="w-5 h-5 text-green-400"></i></div>
+              <div>
+                <h3 class="font-semibold text-white">Audit Logging</h3>
+                <span class="text-xs text-gray-500">n8n Workflow</span>
+              </div>
+              <div class="ml-auto px-2 py-1 rounded-lg bg-shield-500/20 text-shield-400 text-xs font-semibold">Active</div>
+            </div>
+            <p class="text-sm text-gray-400 mb-4">Log all scan results and verdicts to your SIEM for compliance and audit trail.</p>
+            <div class="flex items-center gap-2 text-xs text-gray-500"><i data-lucide="git-branch" class="w-3 h-3"></i> Trigger: Every Scan → Action: Log to SIEM</div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6 hover:border-cyber-500/50 transition-colors">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center"><i data-lucide="webhook" class="w-5 h-5 text-amber-400"></i></div>
+              <div>
+                <h3 class="font-semibold text-white">Custom Webhooks</h3>
+                <span class="text-xs text-gray-500">n8n Workflow</span>
+              </div>
+              <div class="ml-auto px-2 py-1 rounded-lg bg-gray-500/20 text-gray-400 text-xs font-semibold">Coming Soon</div>
+            </div>
+            <p class="text-sm text-gray-400 mb-4">Define custom webhook endpoints for any external integration or custom workflow.</p>
+            <div class="flex items-center gap-2 text-xs text-gray-500"><i data-lucide="git-branch" class="w-3 h-3"></i> Trigger: Configurable → Action: Custom Endpoint</div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6 hover:border-cyber-500/50 transition-colors border-dashed border-white/10">
+            <div class="flex flex-col items-center justify-center h-full text-center py-4">
+              <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-3"><i data-lucide="plus" class="w-6 h-6 text-gray-500"></i></div>
+              <h3 class="font-semibold text-gray-400">Add Workflow</h3>
+              <p class="text-xs text-gray-600 mt-1">Connect n8n or build custom integrations</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Automation History -->
+        <div class="glass-card rounded-2xl p-6">
+          <h3 class="font-semibold text-white mb-4 flex items-center gap-2"><i data-lucide="history" class="w-5 h-5 text-cyber-400"></i> Automation History</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-white/10">
+                  <th class="text-left py-2 text-gray-400 font-medium">Workflow</th>
+                  <th class="text-left py-2 text-gray-400 font-medium">Event</th>
+                  <th class="text-left py-2 text-gray-400 font-medium">Status</th>
+                  <th class="text-left py-2 text-gray-400 font-medium">Time</th>
+                </tr>
+              </thead>
+              <tbody id="automationHistory">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRIVACY ============ -->
+    <section id="page-privacy" class="page-section">
+      <div class="max-w-4xl mx-auto px-6 pt-28 pb-12">
+        <h1 class="text-3xl font-bold text-white mb-8">Privacy & Data</h1>
+        
+        <div class="space-y-4">
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-cyber-500/20 flex items-center justify-center"><i data-lucide="shield" class="w-5 h-5 text-cyber-400"></i></div>
+              <h2 class="text-xl font-bold text-white">Privacy Policy</h2>
+            </div>
+            <div class="text-sm text-gray-400 space-y-3">
+              <p>CyberShield AI is built with a privacy-first architecture. We believe cybersecurity tools should not compromise user privacy while protecting users from threats.</p>
+              <p><strong class="text-gray-200">Data Processing:</strong> All scans are processed temporarily in memory. No scan input or results are permanently stored on our servers by default.</p>
+              <p><strong class="text-gray-200">LLM Interactions:</strong> When multiple LLMs analyze your input, the data is sent directly to the respective API endpoints under their own privacy policies. We do not store intermediary LLM responses.</p>
+              <p><strong class="text-gray-200">Cookies & Tracking:</strong> We use minimal, essential cookies only for session management and theme preferences. No third-party tracking or analytics cookies are used.</p>
+              <p><strong class="text-gray-200">Data Retention:</strong> Scan results are available during your session and are purged when the session ends. Users may optionally export results before closing the session.</p>
+            </div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-shield-500/20 flex items-center justify-center"><i data-lucide="database" class="w-5 h-5 text-shield-400"></i></div>
+              <h2 class="text-xl font-bold text-white">Data Collection</h2>
+            </div>
+            <div class="text-sm text-gray-400 space-y-3">
+              <p><strong class="text-gray-200">What We Collect:</strong></p>
+              <ul class="list-disc list-inside space-y-1 ml-2">
+                <li>Scan input you provide (text, URLs, file content) — processed temporarily only</li>
+                <li>Context information you optionally provide — processed temporarily only</li>
+                <li>Aggregate anonymized statistics (threat categories, scan counts) — no personal data</li>
+              </ul>
+              <p><strong class="text-gray-200">What We Do NOT Collect:</strong></p>
+              <ul class="list-disc list-inside space-y-1 ml-2">
+                <li>Personal identification information</li>
+                <li>IP addresses linked to scan results</li>
+                <li>Browsing history or behavior patterns</li>
+                <li>Permanent storage of scan inputs or outputs</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center"><i data-lucide="hand" class="w-5 h-5 text-amber-400"></i></div>
+              <h2 class="text-xl font-bold text-white">User Consent</h2>
+            </div>
+            <div class="text-sm text-gray-400 space-y-4">
+              <p>By using CyberShield AI, you consent to the temporary processing of your input data for threat analysis purposes.</p>
+              <div class="flex items-center gap-3 p-4 bg-white/5 rounded-xl">
+                <input type="checkbox" id="consentCheck" class="w-4 h-4 accent-cyber-500 cursor-pointer">
+                <label for="consentCheck" class="text-sm text-gray-300 cursor-pointer">I understand that my input will be sent to multiple LLM APIs for analysis and will not be permanently stored.</label>
+              </div>
+              <div class="flex items-center gap-3 p-4 bg-white/5 rounded-xl">
+                <input type="checkbox" id="consentData" class="w-4 h-4 accent-shield-500 cursor-pointer">
+                <label for="consentData" class="text-sm text-gray-300 cursor-pointer">I consent to anonymized aggregate statistics being collected to improve the service.</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center"><i data-lucide="timer" class="w-5 h-5 text-purple-400"></i></div>
+              <h2 class="text-xl font-bold text-white">Temporary Processing</h2>
+            </div>
+            <div class="text-sm text-gray-400 space-y-3">
+              <p>All data processing is ephemeral. When you submit a scan:</p>
+              <ol class="list-decimal list-inside space-y-1 ml-2">
+                <li>Your input is encrypted in transit (TLS/SSL)</li>
+                <li>It is held in secure memory for the duration of the analysis</li>
+                <li>It is sent to configured LLM APIs over secure connections</li>
+                <li>Results are assembled and delivered to you</li>
+                <li>All temporary data is purged from memory after delivery</li>
+              </ol>
+              <div class="p-4 bg-cyber-500/10 border border-cyber-500/20 rounded-xl mt-3">
+                <div class="flex items-center gap-2 text-cyber-300 font-semibold text-sm mb-1"><i data-lucide="info" class="w-4 h-4"></i> Zero Retention</div>
+                <p class="text-xs text-gray-400">By default, no data is written to disk. All processing occurs in volatile memory only.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DOCUMENTATION ============ -->
+    <section id="page-docs" class="page-section">
+      <div class="max-w-4xl mx-auto px-6 pt-28 pb-12">
+        <h1 class="text-3xl font-bold text-white mb-8">Documentation</h1>
+        
+        <div class="space-y-4">
+          <!-- User Manual -->
+          <div class="glass-card rounded-2xl overflow-hidden">
+            <button onclick="toggleAccordion('docManual')" class="w-full flex items-center justify-between p-6 hover:bg-white/5 transition-colors">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-cyber-500/20 flex items-center justify-center"><i data-lucide="book" class="w-5 h-5 text-cyber-400"></i></div>
+                <div class="text-left"><h2 class="text-lg font-bold text-white">User Manual</h2><p class="text-xs text-gray-500">Getting started with CyberShield AI</p></div>
+              </div>
+              <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform" id="docManualArrow"></i>
+            </button>
+            <div id="docManual" class="hidden px-6 pb-6">
+              <div class="text-sm text-gray-400 space-y-4">
+                <div>
+                  <h4 class="text-white font-semibold mb-2">1. Starting a Scan</h4>
+                  <p>Navigate to the Scanners page from the top navigation. Choose the scanner module that matches your input type (Email, URL, File, etc.). Enter or paste the content you want analyzed in the input area.</p>
+                </div>
+                <div>
+                  <h4 class="text-white font-semibold mb-2">2. Providing Context</h4>
+                  <p>Before each scan, you'll see a Context Box. This is where you can share additional information about the item being scanned — where you received it, whether it was expected, who sent it, etc. This helps our AI produce more accurate and relevant assessments.</p>
+                </div>
+                <div>
+                  <h4 class="text-white font-semibold mb-2">3. Understanding Results</h4>
+                  <p>After analysis, you'll see: individual LLM responses, an aggregated verdict, a confidence score, and a human-friendly AI advisor opinion. The verdict ranges from Safe (green) to Critical (red) with varying confidence levels.</p>
+                </div>
+                <div>
+                  <h4 class="text-white font-semibold mb-2">4. Multi-LLM Analysis</h4>
+                  <p>Each scan is processed by multiple AI models simultaneously. The system compares their outputs, resolves disagreements, and produces one unified, explainable verdict. This cross-verification significantly improves accuracy.</p>
+                </div>
+                <div>
+                  <h4 class="text-white font-semibold mb-2">5. Dashboard & History</h4>
+                  <p>The Dashboard provides an overview of all your scans, threat statistics, and security tips. Your recent scan history is displayed for quick reference.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ -->
+          <div class="glass-card rounded-2xl overflow-hidden">
+            <button onclick="toggleAccordion('docFaq')" class="w-full flex items-center justify-between p-6 hover:bg-white/5 transition-colors">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-shield-500/20 flex items-center justify-center"><i data-lucide="help-circle" class="w-5 h-5 text-shield-400"></i></div>
+                <div class="text-left"><h2 class="text-lg font-bold text-white">FAQ</h2><p class="text-xs text-gray-500">Frequently asked questions</p></div>
+              </div>
+              <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform" id="docFaqArrow"></i>
+            </button>
+            <div id="docFaq" class="hidden px-6 pb-6">
+              <div class="space-y-4 text-sm text-gray-400">
+                <div class="p-4 bg-white/5 rounded-xl">
+                  <h4 class="text-white font-semibold mb-1">Is my data stored permanently?</h4>
+                  <p>No. All data is processed temporarily in memory and purged after results are delivered. See our Privacy page for full details.</p>
+                </div>
+                <div class="p-4 bg-white/5 rounded-xl">
+                  <h4 class="text-white font-semibold mb-1">How accurate are the scans?</h4>
+                  <p>Our multi-LLM approach typically achieves 85-95% accuracy depending on the threat type. Each result includes a confidence score so you can gauge reliability.</p>
+                </div>
+                <div class="p-4 bg-white/5 rounded-xl">
+                  <h4 class="text-white font-semibold mb-1">Which LLMs are used?</h4>
+                  <p>Currently: GPT-4o, Claude 3.5, and Gemini Pro. Additional models can be added to the pipeline via configuration.</p>
+                </div>
+                <div class="p-4 bg-white/5 rounded-xl">
+                  <h4 class="text-white font-semibold mb-1">Can I use this for my organization?</h4>
+                  <p>Yes. CyberShield AI is designed for both individual and organizational use. Contact us for enterprise deployment options.</p>
+                </div>
+                <div class="p-4 bg-white/5 rounded-xl">
+                  <h4 class="text-white font-semibold mb-1">What is n8n integration?</h4>
+                  <p>n8n is a workflow automation platform. Our integration allows you to trigger automated actions (email alerts, incident creation, etc.) based on scan results.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cyber Safety Guide -->
+          <div class="glass-card rounded-2xl overflow-hidden">
+            <button onclick="toggleAccordion('docGuide')" class="w-full flex items-center justify-between p-6 hover:bg-white/5 transition-colors">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center"><i data-lucide="shield-alert" class="w-5 h-5 text-amber-400"></i></div>
+                <div class="text-left"><h2 class="text-lg font-bold text-white">Cyber Safety Guide</h2><p class="text-xs text-gray-500">Essential cybersecurity practices</p></div>
+              </div>
+              <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform" id="docGuideArrow"></i>
+            </button>
+            <div id="docGuide" class="hidden px-6 pb-6">
+              <div class="text-sm text-gray-400 space-y-3">
+                <div class="p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
+                  <h4 class="text-red-300 font-semibold mb-1">🔴 Phishing Awareness</h4>
+                  <p>Never click links in unsolicited emails. Verify sender addresses carefully. Look for misspellings and urgent language.</p>
+                </div>
+                <div class="p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl">
+                  <h4 class="text-blue-300 font-semibold mb-1">🔵 Password Security</h4>
+                  <p>Use unique, strong passwords for every account. Enable multi-factor authentication wherever possible. Use a reputable password manager.</p>
+                </div>
+                <div class="p-4 bg-green-500/10 border border-green-500/20 rounded-xl">
+                  <h4 class="text-green-300 font-semibold mb-1">🟢 Safe Browsing</h4>
+                  <p>Check URLs before clicking. Look for HTTPS indicators. Avoid downloading files from untrusted sources.</p>
+                </div>
+                <div class="p-4 bg-purple-500/10 border border-purple-500/20 rounded-xl">
+                  <h4 class="text-purple-300 font-semibold mb-1">🟣 Social Engineering</h4>
+                  <p>Be skeptical of unexpected requests for information or action. Verify identities through separate channels. Don't share sensitive data over unsecured communications.</p>
+                </div>
+                <div class="p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl">
+                  <h4 class="text-amber-300 font-semibold mb-1">🟡 AI Safety</h4>
+                  <p>Be cautious with AI-generated content. Don't paste sensitive data into public AI tools. Watch for prompt injection attempts in shared documents.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Online Best Practices -->
+          <div class="glass-card rounded-2xl overflow-hidden">
+            <button onclick="toggleAccordion('docPractices')" class="w-full flex items-center justify-between p-6 hover:bg-white/5 transition-colors">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center"><i data-lucide="check-square" class="w-5 h-5 text-purple-400"></i></div>
+                <div class="text-left"><h2 class="text-lg font-bold text-white">Online Best Practices</h2><p class="text-xs text-gray-500">Stay safe in the digital world</p></div>
+              </div>
+              <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform" id="docPracticesArrow"></i>
+            </button>
+            <div id="docPractices" class="hidden px-6 pb-6">
+              <div class="text-sm text-gray-400 space-y-2">
+                <div class="flex items-start gap-3 p-3 bg-white/5 rounded-xl"><span class="text-shield-400 font-bold">01</span><span>Keep all software and operating systems updated to the latest versions.</span></div>
+                <div class="flex items-start gap-3 p-3 bg-white/5 rounded-xl"><span class="text-shield-400 font-bold">02</span><span>Use a VPN on public Wi-Fi networks. Avoid accessing sensitive accounts on public networks.</span></div>
+                <div class="flex items-start gap-3 p-3 bg-white/5 rounded-xl"><span class="text-shield-400 font-bold">03</span><span>Regularly review account permissions and revoke access for unused applications.</span></div>
+                <div class="flex items-start gap-3 p-3 bg-white/5 rounded-xl"><span class="text-shield-400 font-bold">04</span><span>Enable automatic screen lock on all devices. Use biometric authentication when available.</span></div>
+                <div class="flex items-start gap-3 p-3 bg-white/5 rounded-xl"><span class="text-shield-400 font-bold">05</span><span>Back up important data regularly using the 3-2-1 rule (3 copies, 2 media types, 1 offsite).</span></div>
+                <div class="flex items-start gap-3 p-3 bg-white/5 rounded-xl"><span class="text-shield-400 font-bold">06</span><span>Verify before trusting. Scan suspicious items with CyberShield AI before engaging.</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Limitations -->
+          <div class="glass-card rounded-2xl overflow-hidden">
+            <button onclick="toggleAccordion('docLimitations')" class="w-full flex items-center justify-between p-6 hover:bg-white/5 transition-colors">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center"><i data-lucide="alert-circle" class="w-5 h-5 text-red-400"></i></div>
+                <div class="text-left"><h2 class="text-lg font-bold text-white">AI Limitations</h2><p class="text-xs text-gray-500">Understanding the bounds of AI analysis</p></div>
+              </div>
+              <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform" id="docLimitationsArrow"></i>
+            </button>
+            <div id="docLimitations" class="hidden px-6 pb-6">
+              <div class="text-sm text-gray-400 space-y-3">
+                <div class="p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl">
+                  <h4 class="text-amber-300 font-semibold mb-1">⚠️ Not a Replacement for Human Judgment</h4>
+                  <p>AI analysis should supplement, not replace, human security expertise. Always verify critical findings with qualified professionals.</p>
+                </div>
+                <div class="p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl">
+                  <h4 class="text-amber-300 font-semibold mb-1">⚠️ False Positives & Negatives</h4>
+                  <p>AI can produce incorrect assessments. A "Safe" verdict doesn't guarantee safety, and a "High Risk" verdict may be a false alarm.</p>
+                </div>
+                <div class="p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl">
+                  <h4 class="text-amber-300 font-semibold mb-1">⚠️ Training Data Limitations</h4>
+                  <p>LLMs are trained on historical data and may not recognize novel attack vectors that emerged after their training cutoff.</p>
+                </div>
+                <div class="p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl">
+                  <h4 class="text-amber-300 font-semibold mb-1">⚠️ Context Dependency</h4>
+                  <p>Accuracy improves with better context. Scans without context information may produce less reliable results.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Report an Issue -->
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center"><i data-lucide="flag" class="w-5 h-5 text-red-400"></i></div>
+              <div><h2 class="text-lg font-bold text-white">Report an Issue</h2><p class="text-xs text-gray-500">Help us improve CyberShield AI</p></div>
+            </div>
+            <div class="space-y-3">
+              <input type="text" placeholder="Issue title" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm text-gray-200 placeholder-gray-500 focus:border-cyber-500 focus:outline-none transition">
+              <select class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm text-gray-200 focus:border-cyber-500 focus:outline-none transition">
+                <option value="">Select category</option>
+                <option>Incorrect verdict</option>
+                <option>False positive</option>
+                <option>False negative</option>
+                <option>UI/UX issue</option>
+                <option>Performance issue</option>
+                <option>Feature request</option>
+                <option>Other</option>
+              </select>
+              <textarea rows="4" placeholder="Describe the issue in detail..." class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm text-gray-200 placeholder-gray-500 focus:border-cyber-500 focus:outline-none resize-none transition"></textarea>
+              <button class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold text-sm hover:opacity-90 transition">
+                Submit Report
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+<script src="https://deepsite.hf.co/deepsite-badge.js"></script>
+</body>
+</html>
