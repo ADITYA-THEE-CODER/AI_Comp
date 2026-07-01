@@ -1,0 +1,123 @@
+Project Goal
+
+Build a production-quality AI-powered Cyber Safety Platform with a modern UI, scalable backend, privacy-first architecture, and modular design. The platform should feel like a commercial cybersecurity SaaS product rather than a student project.
+
+Core Requirements
+Professional landing page
+Authentication (optional if time permits)
+Responsive dashboard
+Modern UI with dark/light mode
+React frontend
+FastAPI-ready backend integration
+Modular architecture
+Professional animations
+Accessible design
+AI Analysis
+
+Create modules for:
+
+Email Scanner
+URL Scanner
+File Scanner
+Message Scanner
+Prompt Injection Detection
+Social Engineering Detection
+QR Code Scanner (future-ready)
+Malware Risk Analyzer
+
+Each module should:
+
+Accept user input
+Show scan progress
+Display confidence score
+Explain reasoning
+Generate a human-friendly recommendation
+Multi-LLM Engine
+
+Design the backend so every request can be sent to multiple LLMs.
+
+The system should:
+
+Collect responses
+Compare outputs
+Aggregate findings
+Produce one explainable final verdict
+Context Box
+
+Before every scan include:
+
+"Tell us anything that may help analyze this item."
+
+Examples:
+
+Where did you receive it?
+Was it expected?
+Who sent it?
+Any additional context?
+Human-like AI Opinion
+
+Every scan should conclude with:
+
+Summary
+Risk explanation
+Recommended actions
+Confidence level
+
+Written naturally, like a cybersecurity advisor.
+
+Automation
+
+Integrate with n8n.
+
+Possible workflows:
+
+Email alerts
+Incident creation
+Notifications
+Logging
+Future integrations
+Privacy
+
+Include:
+
+Privacy Policy
+Data Collection page
+User Consent
+Temporary processing
+No permanent storage by default
+Documentation
+
+Include:
+
+User Manual
+FAQ
+Cyber Safety Guide
+Online Best Practices
+AI Limitations
+Report an Issue
+Dashboard
+
+Dashboard should include:
+
+Recent scans
+Risk statistics
+Automation history
+AI verdict history
+Threat categories
+Security tips
+Design
+
+The design should feel similar to enterprise cybersecurity platforms.
+
+Use:
+
+Glassmorphism
+Modern cards
+Professional charts
+Smooth animations
+Premium SaaS styling
+Code Quality
+
+Generate maintainable production-ready code.
+
+Use reusable components, clean architecture, API separation, and prepare the project for future expansion.
