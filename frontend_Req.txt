@@ -1,0 +1,419 @@
+You are a Senior Frontend Engineer at Google, working with a Senior Product Designer and Cybersecurity UX Designer.
+
+Your task is to build ONLY THE FRONTEND of an enterprise-grade AI cybersecurity platform called CyberShield AI.
+
+IMPORTANT:
+Do NOT build any backend.
+Do NOT use fake low-quality UI.
+Do NOT simplify anything.
+Build production-quality frontend.
+
+Tech Stack:
+- HTML5
+- CSS3
+- TailwindCSS
+- JavaScript (Vanilla)
+- Chart.js
+- Lucide Icons
+
+Design Style:
+Google Cloud
+Cloudflare Dashboard
+Microsoft Defender
+CrowdStrike Falcon
+VirusTotal
+Linear.app
+Apple-level animations
+
+Theme:
+Modern
+Glassmorphism
+Cybersecurity
+Dark Theme
+Professional
+Enterprise
+
+The entire website should feel like a commercial SaaS product.
+
+----------------------------------------------------
+
+Pages Required
+
+1. Landing Page
+
+Huge Hero
+Animated background
+Professional navigation
+CyberShield AI branding
+
+Top Right:
+
+Install Chrome Extension button
+
+Start Scanning button
+
+Live stats
+
+Scrolling animations
+
+Feature cards
+
+Architecture preview
+
+Testimonials
+
+CTA
+
+Professional Footer
+
+----------------------------------------------------
+
+2. Dashboard
+
+Professional analytics dashboard
+
+Cards
+
+Threat Count
+
+Today's Scans
+
+Critical Threats
+
+Zero Trust Status
+
+Charts
+
+Threat timeline
+
+Recent scans
+
+Threat heatmap
+
+Risk Distribution
+
+System Status
+
+Recent Activity
+
+Security Score
+
+----------------------------------------------------
+
+3. Scanner Hub
+
+Cards for
+
+Email Scanner
+
+URL Scanner
+
+File Scanner
+
+QR Scanner
+
+Message Scanner
+
+Malware Scanner
+
+Prompt Injection
+
+Social Engineering
+
+Deepfake Scanner
+
+Each opens beautiful scanning interface.
+
+----------------------------------------------------
+
+4. Scan Page
+
+Large input area
+
+Upload support
+
+Context box
+
+Analyze button
+
+Animated AI loading
+
+Pipeline animation
+
+Multiple AI cards
+
+GPT
+
+Claude
+
+Gemini
+
+Groq
+
+DeepSeek
+
+Fine Tuned Model
+
+Consensus card
+
+Confidence score
+
+Risk Gauge
+
+MITRE Mapping
+
+Threat Score
+
+Risk Level
+
+AI Recommendation
+
+Download PDF
+
+----------------------------------------------------
+
+5. Browser Extension Page
+
+Professional explanation
+
+Features
+
+Screenshots placeholder
+
+How it works
+
+Install Extension button
+
+Permissions explanation
+
+Architecture
+
+----------------------------------------------------
+
+6. Zero Trust Page
+
+Beautiful animated diagram
+
+Everything starts Untrusted
+
+Identity
+
+Behavior
+
+Risk
+
+Validation
+
+Decision
+
+Use SVG animations.
+
+----------------------------------------------------
+
+7. Multi Layer Defense Page
+
+Show
+
+Layer 1
+
+Static Analysis
+
+↓
+
+Threat Intelligence
+
+↓
+
+Fine Tuned AI
+
+↓
+
+Behavior Analysis
+
+↓
+
+GPT
+
+Claude
+
+Gemini
+
+Groq
+
+DeepSeek
+
+↓
+
+Consensus
+
+↓
+
+Risk Engine
+
+Animated pipeline.
+
+----------------------------------------------------
+
+8. Threat Intelligence Page
+
+Threat database
+
+Known phishing
+
+Malware
+
+Prompt Injection
+
+Recent Threats
+
+Attack Statistics
+
+----------------------------------------------------
+
+9. AI Architecture Page
+
+Professional architecture diagram
+
+Chrome Extension
+
+↓
+
+FastAPI
+
+↓
+
+Zero Trust
+
+↓
+
+Threat Intelligence
+
+↓
+
+Fine Tuned Model
+
+↓
+
+GPT
+
+Claude
+
+Gemini
+
+Groq
+
+DeepSeek
+
+↓
+
+Consensus
+
+↓
+
+Dashboard
+
+----------------------------------------------------
+
+10. Automation Page
+
+n8n
+
+Slack
+
+Email
+
+Webhook
+
+SIEM
+
+Incident Response
+
+Workflow cards
+
+----------------------------------------------------
+
+11. Privacy
+
+Enterprise privacy page
+
+Zero retention
+
+Encryption
+
+Consent
+
+----------------------------------------------------
+
+12. Documentation
+
+Accordion layout
+
+Manual
+
+FAQ
+
+Cyber Guide
+
+Report Issue
+
+----------------------------------------------------
+
+Animations
+
+Professional
+
+Smooth
+
+No cheap effects
+
+Page transitions
+
+Hover effects
+
+Loading skeletons
+
+Floating backgrounds
+
+Glowing borders
+
+Glass cards
+
+Animated gradients
+
+----------------------------------------------------
+
+Requirements
+
+Responsive
+
+Pixel perfect
+
+No inline CSS
+
+Reusable components
+
+Clean code
+
+Professional spacing
+
+Proper typography
+
+Consistent color palette
+
+----------------------------------------------------
+
+Output
+
+Separate files
+
+index.html
+
+style.css
+
+script.js
+
+Write complete code.
+
+Never leave placeholders like "TODO".
+
+Every section must be production quality.
