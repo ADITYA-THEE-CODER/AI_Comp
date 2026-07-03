@@ -1,0 +1,950 @@
+Requirement 26 🌐 CyberShield AI Chrome Extension
+
+Instead of being only a website,
+
+CyberShield AI also has a Chrome Extension.
+
+The extension acts as a real-time AI Cyber Assistant while users browse
+the web.
+
+What it should do 1. Analyze Web Pages
+
+Whenever a page loads,
+
+the extension can inspect:
+
+Website URL Domain reputation Suspicious JavaScript Login forms Urgency
+language Popups Downloads
+
+Then show
+
+🟢 Safe
+
+🟡 Suspicious
+
+🔴 Dangerous
+
+2.  Detect AI-generated Phishing
+
+Example
+
+User opens Gmail
+
+↓
+
+Extension analyzes
+
+↓
+
+“This email appears AI-generated.”
+
+↓
+
+Confidence
+
+↓
+
+Explain why.
+
+3.  Deepfake Detection ⭐
+
+This is where I’d be careful.
+
+A Chrome extension cannot reliably detect deepfakes by itself.
+
+Even Google doesn’t have a perfect detector.
+
+Instead,
+
+make it
+
+AI Media Authenticity Analyzer
+
+It can analyze
+
+Images Videos Voice PDFs Social posts
+
+using available AI models.
+
+For example
+
+User right-clicks
+
+Analyze Media
+
+↓
+
+CyberShield
+
+↓
+
+Possible AI-generated
+
+Confidence
+
+Evidence
+
+This is much more realistic.
+
+4.  Page Risk Overlay
+
+Imagine browsing
+
+Facebook
+
+Instagram
+
+LinkedIn
+
+Twitter
+
+News websites
+
+CyberShield displays
+
+Page Safety
+
+██████████
+
+95%
+
+Trusted
+
+or
+
+Warning
+
+Possible Scam
+
+Fake Giveaway
+
+AI-generated
+
+Suspicious Links
+
+without leaving the page.
+
+5.  Highlight Dangerous Elements
+
+Instead of only warning,
+
+highlight
+
+suspicious links fake buttons fake login forms malicious QR codes scam
+phone numbers cryptocurrency wallet addresses 6. AI Sidebar
+
+Like GitHub Copilot.
+
+A sidebar opens.
+
+User asks
+
+“Why is this website dangerous?”
+
+↓
+
+CyberShield explains.
+
+7.  Right Click Scanner
+
+Right click
+
+↓
+
+Analyze with CyberShield
+
+Works on
+
+Image URL Email PDF Video QR Code Selected Text 8. Live Protection
+
+Instead of
+
+Scan
+
+↓
+
+Result
+
+Use
+
+Browsing
+
+↓
+
+Extension watches
+
+↓
+
+Threat detected
+
+↓
+
+Popup warning
+
+↓
+
+Suggest action
+
+Now it becomes
+
+real-time protection.
+
+9.  Browser Threat Timeline
+
+Shows
+
+Visited
+
+↓
+
+Detected
+
+↓
+
+Blocked
+
+↓
+
+Ignored
+
+↓
+
+Resolved 10. Deepfake Warning
+
+Suppose someone watches a video.
+
+The extension says
+
+Authenticity
+
+72%
+
+Potential AI-generated
+
+Confidence
+
+Medium
+
+Notice
+
+It never says
+
+“This IS fake.”
+
+It says
+
+“Potential AI-generated”
+
+because that’s the honest engineering approach.
+
+This becomes your architecture CyberShield Platform
+
+                │
+
+      ┌─────────┴─────────┐
+
+      │                   │
+
+Web Dashboard Chrome Extension
+
+      │                   │
+
+      └─────────┬─────────┘
+
+                │
+
+        Zero Trust Engine
+
+                │
+
+      Multi-Layer Defense
+
+                │
+
+      Threat Intelligence
+
+                │
+
+       Multi-LLM Consensus
+
+                │
+
+       Recommendation Engine
+
+                │
+
+      Automation & Reports
+
+This is actually how enterprise products work
+
+Companies don’t build
+
+Website
+
+or
+
+Extension.
+
+They build
+
+Platform + Browser Extension + APIs + Backend
+
+That sounds much stronger.
+
+My suggestion
+
+Instead of calling it CyberShield AI Website, call it:
+
+CyberShield AI Platform
+
+which includes:
+
+🌐 Web Dashboard 🧩 Chrome Extension 🤖 AI Security Engine 🛡️ Zero Trust
+Multi-Layer Defense ⚡ Automation Hub 📊 Security Analytics 📄 Incident
+Reporting
+
+That framing makes it feel like a cohesive security ecosystem rather
+than a single application, and it aligns well with the kind of
+integrated security tooling used in real organizations.
+
+the app should include a download extention button on top right side
+
+Perfect. That changes the project from “an AI scanner” into something
+that looks much closer to a cybersecurity platform.
+
+Here is the complete requirement list I have for CyberShield AI v2,
+including everything we’ve discussed.
+
+CyberShield AI v2 AI-Powered Multi-Layer Cyber Defense Platform 1.
+Beautiful Modern Website
+
+Enterprise-level UI
+
+futuristic design glassmorphism animations responsive dark/light mode
+Google-quality UI premium dashboard 2. Chrome Extension
+
+Top-right button
+
+Install Extension
+
+The extension should
+
+✅ scan webpages
+
+✅ scan emails
+
+✅ detect phishing
+
+✅ detect malicious URLs
+
+✅ detect suspicious forms
+
+✅ detect fake login pages
+
+✅ detect scam websites
+
+3.  Live Browser Protection
+
+Instead of scanning manually,
+
+the extension watches while browsing.
+
+Example
+
+User opens
+
+paypal-security-login.xyz
+
+↓
+
+Extension immediately shows
+
+⚠ Dangerous Website
+
+Phishing Probability
+
+94%
+
+4.  AI Multi-Scanner
+
+Keep all previous scanners
+
+Email Scanner
+
+URL Scanner
+
+File Scanner
+
+QR Scanner
+
+Message Scanner
+
+Prompt Injection
+
+Malware Risk
+
+Social Engineering
+
+5.  Deepfake Detection
+
+One of the judges’ favorite topics.
+
+Allow
+
+Image Upload
+
+Video Upload
+
+Audio Upload
+
+Document Upload
+
+Outputs
+
+Authenticity Score
+
+Deepfake Probability
+
+Signs of Manipulation
+
+Metadata Analysis
+
+AI Explanation
+
+6.  Multi-LLM Analysis
+
+Instead of one AI
+
+Run
+
+GPT
+
+Claude
+
+Gemini
+
+then
+
+Consensus Engine
+
+Confidence Score
+
+Reasoning
+
+Disagreement Detection
+
+7.  Zero Trust Engine ⭐
+
+Very important.
+
+Everything starts as
+
+UNTRUSTED
+
+Every file
+
+Every link
+
+Every document
+
+Every QR
+
+Every email
+
+must pass
+
+Identity Verification
+
+↓
+
+Threat Detection
+
+↓
+
+Behavior Analysis
+
+↓
+
+Risk Calculation
+
+↓
+
+Policy Engine
+
+↓
+
+Final Decision
+
+8.  Multi-Layer Defense ⭐
+
+This is what judges will love.
+
+Layer 1
+
+Static Analysis
+
+Layer 2
+
+AI Analysis
+
+Layer 3
+
+Behavior Analysis
+
+Layer 4
+
+Threat Intelligence
+
+Layer 5
+
+LLM Consensus
+
+Layer 6
+
+Zero Trust Validation
+
+Layer 7
+
+Final Risk Engine
+
+Every scan goes through all layers.
+
+9.  Threat Intelligence Engine
+
+Show
+
+Known Malware
+
+Known Scam Domains
+
+Known Phishing
+
+Known Prompt Injection
+
+Known Ransomware Indicators
+
+Known Suspicious Patterns
+
+10. Risk Score Engine
+
+Instead of
+
+Safe
+
+Danger
+
+Output
+
+Threat Score
+
+87/100
+
+Attack Probability
+
+Confidence
+
+Risk Level
+
+Recommended Action
+
+11. AI Security Advisor
+
+Human-like explanation.
+
+Instead of
+
+“Phishing detected.”
+
+Say
+
+This email attempts to create urgency by claiming your account will be
+suspended within 24 hours. The sender’s domain differs from the official
+organization, and the embedded link redirects to a newly registered
+domain commonly associated with credential harvesting. We recommend
+avoiding interaction and reporting the message.
+
+Very human.
+
+12. Attack Timeline
+
+After every scan
+
+show
+
+Input
+
+↓
+
+AI Analysis
+
+↓
+
+Threat Detection
+
+↓
+
+Zero Trust Validation
+
+↓
+
+Final Verdict
+
+Animated.
+
+13. MITRE ATT&CK Mapping
+
+Professional cybersecurity feature.
+
+Example
+
+Credential Harvesting
+
+↓
+
+MITRE
+
+T1566
+
+Phishing
+
+or
+
+Prompt Injection
+
+↓
+
+Mapped Technique
+
+Makes judges realize
+
+You know cybersecurity.
+
+14. Explainable AI (XAI)
+
+Instead of
+
+“High Risk”
+
+Explain
+
+Why
+
+How
+
+Evidence
+
+Confidence
+
+Reasoning
+
+15. Confidence Breakdown
+
+Show
+
+GPT
+
+92%
+
+Claude
+
+89%
+
+Gemini
+
+91%
+
+Consensus
+
+90%
+
+16. Dashboard
+
+Live
+
+Threats Today
+
+Scans
+
+Attack Types
+
+Top Risks
+
+Heat Map
+
+Charts
+
+Timeline
+
+Recent Activity
+
+17. Automation
+
+Keep
+
+n8n
+
+Email Alerts
+
+Slack
+
+Incident Creation
+
+SIEM
+
+Webhook
+
+18. Privacy Page
+
+Already present
+
+Improve
+
+Zero Data Retention
+
+Encryption
+
+Secure APIs
+
+Temporary Memory
+
+User Consent
+
+19. Documentation
+
+Keep
+
+FAQ
+
+Manual
+
+Cyber Guide
+
+Best Practices
+
+Limitations
+
+Report Issue
+
+20. Chrome Extension Integration
+
+Website and extension communicate.
+
+Extension
+
+↓
+
+Website Dashboard
+
+↓
+
+Threat History
+
+↓
+
+Analytics
+
+↓
+
+Reports
+
+21. AI Report Generator
+
+After scan
+
+Generate
+
+Professional PDF
+
+Includes
+
+Summary
+
+Threats
+
+Evidence
+
+MITRE
+
+Confidence
+
+Recommendations
+
+Can be downloaded.
+
+22. Threat Severity Levels
+
+Instead of
+
+Safe
+
+Danger
+
+Use
+
+🟢 Safe
+
+🔵 Low
+
+🟡 Medium
+
+🟠 High
+
+🔴 Critical
+
+23. Smart Recommendations
+
+Every result gives
+
+Immediate Action
+
+Long-Term Prevention
+
+Best Practices
+
+Reference
+
+24. Performance
+
+Smooth
+
+Fast
+
+Animations
+
+Skeleton Loading
+
+Streaming Results
+
+Live Progress
+
+25. Enterprise Feeling
+
+Everything should feel like
+
+Google
+
+Microsoft Defender
+
+CrowdStrike
+
+Cloudflare
+
+VirusTotal
+
+rather than
+
+a college project.
+
+26. Future AI Architecture Page ⭐
+
+One page showing the system architecture.
+
+Chrome Extension │ ▼ API Gateway │ ▼ Threat Intelligence │ ▼ Zero Trust
+Engine │ ▼ Static Analysis │ ▼ Behavior Analysis │ ▼ GPT Claude Gemini │
+▼ Consensus Engine │ ▼ Risk Engine │ ▼ Dashboard
+
+Judges love architecture diagrams.
+
+27. Cyber Defense Pipeline ⭐
+
+Every scan follows
+
+Receive Input
+
+↓
+
+Validate
+
+↓
+
+Zero Trust
+
+↓
+
+Static Analysis
+
+↓
+
+Threat Intelligence
+
+↓
+
+Behavior Analysis
+
+↓
+
+AI Detection
+
+↓
+
+LLM Consensus
+
+↓
+
+MITRE Mapping
+
+↓
+
+Risk Engine
+
+↓
+
+Security Report
+
+↓
+
+Recommendations
+
+This is how enterprise cybersecurity products are designed.
+
+28. AI Threat Memory (Session-Based)
+
+Within the current session, the app can recognize repeated threats and
+say things like:
+
+“This domain matches a previously flagged phishing pattern from your
+recent scans.”
+
+This demonstrates intelligent correlation without claiming permanent
+storage.
+
+Overall Vision
+
+By the time we’re done, CyberShield AI won’t look like “a website that
+calls an LLM.” It will resemble a miniature enterprise cyber defense
+platform with modern UI, layered security architecture, explainable AI,
+a Chrome extension, and features that align closely with what judges
+evaluating a “Cyber Safety in the Age of AI” project are likely to
+appreciate.
+
+======================== ZeroTrust One Updates (v2)
+========================
+
+-   Rename platform to: ZeroTrust One.
+-   Chrome Extension is a primary component, not an optional add-on.
+-   Add a top-right “Download Extension” button in the desktop/web UI.
+-   Use a Desktop Application (PySide6) + Chrome Extension + FastAPI
+    backend architecture.
+-   AI stack:
+    -   Fine-tuned Transformer (primary detector)
+    -   Groq (reasoning & explanations)
+    -   DeepSeek (cross-validation)
+-   Implement a Unified AI Decision Engine. Do NOT expose per-model
+    confidence scores or internal voting. Show only: • Threat Level •
+    Overall Confidence • Risk Score • Final Recommendation
+-   Produce a natural 5–6 line explanation for every result.
+-   Follow Zero Trust + Multi-Layer Defense for every scan.
+-   Never fabricate alerts, analytics, logs, or live threat data.
+-   Include a built-in Demo Dataset: phishing emails, safe emails, AI
+    documents, human documents, fake invoices, genuine invoices,
+    malicious URLs, safe URLs, deepfake images, authentic images, scam
+    PDFs, genuine PDFs.
+-   Desktop dashboard should include: reports, analytics, history,
+    settings, AI explanations, extension management.
+-   Chrome extension should support: webpage scanning, phishing
+    detection, PDF analysis, suspicious forms, downloads, right-click
+    analysis, live warnings, browser timeline, AI sidebar.
+-   UI inspiration: Huly, Linear, Arc Browser, Notion. Avoid generic
+    AI-generated layouts.
+-   Enterprise-first experience: Desktop App + Chrome Extension + AI
+    Backend + Reporting.
